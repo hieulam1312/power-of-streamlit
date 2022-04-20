@@ -1,4 +1,4 @@
-
+py-trello
 pandas
 numpy
 streamlit
@@ -14,9 +14,10 @@ matplotlib
 seaborn
 xlsxwriter
 gspread
-streamlit-pandas-profiling==0.1.2
+streamlit-pandas-profiling
 sklearn
 waterfallcharts
 gspread-dataframe
 python-barcode 
 # python-barcode-writer>=1.0.1
+pyxlsb ==1.0.9
