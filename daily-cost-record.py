@@ -8,4 +8,4 @@ from datetime import datetime
 import pytz
 tz = pytz.timezone('asia/ho_chi_minh')
 
-st.tilte('hello world')
+st.title('hello world')
