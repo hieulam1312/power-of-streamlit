@@ -1,6 +1,4 @@
 import datetime as dt
-from re import L
-from textwrap import indent
 import gspread
 import streamlit as st
 import pandas as pd
