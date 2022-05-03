@@ -58,7 +58,7 @@ user=st.sidebar.text_input('User')
 pw=st.sidebar.text_input('Password',type='password')
 if user==st.secrets['user'] and pw==st.secrets['pw']:
     
-    radio=st.radio('Selection',['Chi phí tuần','Tổng hợp tháng','So sánh'])
+    radio=st.sidebar.radio('Selection',['Chi phí tuần','Tổng hợp tháng','So sánh'])
     if radio=='Chi phí tuần':
         st.subtitle="Chi phí tuần này"
         df
