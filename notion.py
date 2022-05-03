@@ -47,18 +47,26 @@ class NotionSync:
 
         return pd.DataFrame.from_dict(projects_data) 
 import datetime as dt
+                                
 nsync = NotionSync()
 data = nsync.query_databases()
 
 projects = nsync.get_projects_titles(data)
 df=nsync.get_projects_data(data,projects)
 
-
-df['Số tiền']=df['Số tiền'].astype(float)
-df['Tháng chi']=df['Ngày chi'].astype('datetime64').dt.month.astype(int)
-group=df.groupby(['Tháng chi','Phân loại']).agg({'Số tiền':'sum'}).reset_index()
-# data=df.pivot(index=['Ngày chi','Nội dung chi'],columns='Phân loại',values='Số tiền').reset_index()
-
-data=group.pivot(index=['Phân loại'],columns='Tháng chi',values='Số tiền').reset_index()
-data['Trung bình']=data.mean(axis=1)
-data
+user=st.sidebar.text_input('User')
+pw=st.sidebar.text_input('Password',type='password')
+if user==st.secrets['user'] and pw==st.secrets['pw']:
+    
+    radio=st.radio('Selection',['Chi phí tuần','Tổng hợp tháng','So sánh')
+    if radio=='Chi phí tuần':
+        st.subtitle="Chi phí tuần này"
+        df
+    elif radio=='Tổng hợp tháng':
+        st.subtitle="Tổng hợp tháng"
+        df['Số tiền']=df['Số tiền'].astype(float)
+        df['Tháng chi']=df['Ngày chi'].astype('datetime64').dt.month.astype(int)
+        group=df.groupby(['Tháng chi','Phân loại']).agg({'Số tiền':'sum'}).reset_index()
+        data=group.pivot(index=['Phân loại'],columns='Tháng chi',values='Số tiền').reset_index()
+        data['Trung bình']=data.mean(axis=1)
+        data
