@@ -7,8 +7,8 @@ import pandas as pd
 import streamlit as st
 
 
-token = st.secrets('token') #'
-DATABASE_ID = st.secrets('id') #
+token = st.secrets['token'] #'
+DATABASE_ID = st.secrets['id'] #
 
 headers = {
     "Authorization": "Bearer " + token,
