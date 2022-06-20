@@ -57,7 +57,8 @@ def push_lsx(df,ws1):
     updated1 = existing1.append(df)
     gd.set_with_dataframe(ws1,updated1)
     st.success('Done')
-    
+import gspread_dataframe as gd
+import gspread as gs
 import datetime as dt
 credentials = service_account.Credentials.from_service_account_info(
 st.secrets["gcp_service_account"],
