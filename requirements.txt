@@ -1,5 +1,5 @@
 pandas
-
+google.oauth2
 streamlit <=1.2.0
 gspread-dataframe
 gspread
