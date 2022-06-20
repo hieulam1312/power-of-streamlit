@@ -1,5 +1,4 @@
 pandas
-google.oauth2
 streamlit 
 gspread-dataframe
 gspread
