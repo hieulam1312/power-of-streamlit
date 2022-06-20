@@ -46,8 +46,23 @@ class NotionSync:
                                     for i in range(len(data_json["results"])) if data_json["results"][i]["properties"]["Name"]["title"]]   
 
         return pd.DataFrame.from_dict(projects_data) 
+    
+def push_lsx(df,ws1):
+    spreadsheet_key='1JCyNuairaKmF0KL6Sj-7IegwrrGJ366TUnkUqNxBRAE'
+    import gspread_dataframe as gd
+    import gspread as gs
+    existing1 = gd.get_as_dataframe(ws1)
+    updated1 = existing1.append(df)
+    gd.set_with_dataframe(ws1,updated1)
+    st.success('Done')
+    
 import datetime as dt
-                                
+credentials = service_account.Credentials.from_service_account_info(
+st.secrets["gcp_service_account"],
+scopes=['https://spreadsheets.google.com/feeds',
+        'https://www.googleapis.com/auth/drive'],
+)
+gc = gspread.authorize(credentials)                               
 nsync = NotionSync()
 data = nsync.query_databases()
 
@@ -58,7 +73,7 @@ user=st.sidebar.text_input('User')
 pw=st.sidebar.text_input('Password',type='password')
 if user==st.secrets['user'] and pw==st.secrets['pw']:
     
-    radio=st.sidebar.radio('Selection',['Chi phí tuần','Tổng hợp tháng','So sánh'])
+    radio=st.sidebar.radio('Selection',['Chi phí tuần','Tổng hợp tháng','So sánh','Xuất dữ liệu'])
     if radio=='Chi phí tuần':
         st.subtitle="Chi phí tuần này"
         df
@@ -70,3 +85,7 @@ if user==st.secrets['user'] and pw==st.secrets['pw']:
         data=group.pivot(index=['Phân loại'],columns='Tháng chi',values='Số tiền').reset_index()
         data['Trung bình']=data.mean(axis=1)
         data
+    elif radio=='Xuất dữ liệu':
+        ws1 = gc.open("FIRE - journey").worksheet("Daily-cost")
+        push_lsx(df,ws1)
+        
