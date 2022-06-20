@@ -1,6 +1,6 @@
 pandas
 google.oauth2
-streamlit <=1.2.0
+streamlit 
 gspread-dataframe
 gspread
 oauth2client
