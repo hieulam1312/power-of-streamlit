@@ -82,6 +82,8 @@ if user==st.secrets['user'] and pw==st.secrets['pw']:
     if radio=='Chi phí tuần':
         st.subtitle="Chi phí tuần này"
         df
+        sum=sum(df['Số tiền'])
+        sum
     elif radio=='Tổng hợp tháng':
         st.subtitle="Tổng hợp tháng"
         df['Số tiền']=df['Số tiền'].astype(float)
