@@ -73,7 +73,7 @@ data = nsync.query_databases()
 
 projects = nsync.get_projects_titles(data)
 df=nsync.get_projects_data(data,projects)
-
+df
 user=st.sidebar.text_input('User')
 pw=st.sidebar.text_input('Password',type='password')
 if user==st.secrets['user'] and pw==st.secrets['pw']:
